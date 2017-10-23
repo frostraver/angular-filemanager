@@ -162,8 +162,9 @@
             var item = $scope.singleSelection();
             $scope.apiMiddleware.getContent(item).then(function(data) {
                 item.tempModel.content = item.model.content = data.result;
+                $scope.modal('edit');
+                $scope.loadAce();
             });
-            $scope.modal('edit');
         };
 
         $scope.modal = function(id, hide, returnElement) {
@@ -410,6 +411,12 @@
         $scope.changeLanguage(getQueryParam('lang'));
         $scope.isWindows = getQueryParam('server') === 'Windows';
         $scope.fileNavigator.refresh();
+
+        $scope.loadAce = function() {
+            var editor = ace.edit('editor');
+            editor.getSession().setMode('ace/mode/javascript');
+            editor.getSession().setValue($scope.singleSelection().tempModel.content, 1);
+        }
 
     }]);
 })(angular);

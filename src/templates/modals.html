@@ -113,7 +113,7 @@
             <div class="modal-body" style="height: 80%">
               <div style="height: 100%">
                 Preview for <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
-                <iframe srcdoc="{{ previewHTML | unsafe }}" width="100%" style="height:100%;"></iframe>
+                <iframe srcdoc="{{ previewHTML }}" width="100%" style="height:100%;"></iframe>
               </div>
               <div ng-include data-src="'error-bar'" class="clearfix"></div>
             </div>
@@ -287,7 +287,7 @@
 <div class="modal animated fadeIn" id="edit" ng-class="{'modal-fullscreen': fullscreen}">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <form ng-submit="edit()">
+        <form ng-submit="edit()" onload="loadAce()">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">&times;</span>
@@ -302,7 +302,8 @@
             <div class="modal-body">
                 <label class="radio bold">{{ singleSelection().model.fullPath() }}</label>
                 <span class="label label-warning" ng-show="apiMiddleware.apiHandler.inprocess">{{'loading' | translate}} ...</span>
-                <textarea class="form-control code" ng-model="singleSelection().tempModel.content" ng-show="!apiMiddleware.apiHandler.inprocess" autofocus="autofocus"></textarea>
+                <!-- <textarea class="form-control code" ng-model="singleSelection().tempModel.content" ng-show="!apiMiddleware.apiHandler.inprocess" autofocus="autofocus"></textarea> -->
+                <div id="editor"  style="height: 500px; width: 100%"></div>
                 <div ng-include data-src="'error-bar'" class="clearfix"></div>
             </div>
             <div class="modal-footer">
