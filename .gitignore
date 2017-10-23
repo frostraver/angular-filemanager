@@ -2,3 +2,4 @@
 nbproject/
 node_modules/
 target/
+dist/angular-filemanager.min.js
