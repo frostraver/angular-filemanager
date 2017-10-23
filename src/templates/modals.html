@@ -71,6 +71,84 @@
   </div>
 </div>
 
+<div class="modal animated fadeIn" id="activate">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="activate()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'activate' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                You are going to activate <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
+                <span ng-if="checkActivationResult && checkActivationResult.file != null">IMPORTANT: <b>{{checkActivationResult.file}}</b> will be <b>deactivated</b> when you complete this action.</span>
+                <span ng-if="!checkActivationResult">Checking Activation... Please Wait</span>
+              </div>
+              <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess || !checkActivationResult">{{'activate' | translate}}</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated fadeIn" id="preview">
+  <div class="modal-dialog" style="width: 80%; height: 80%;">
+    <div class="modal-content" style="height: 100%">
+        <form style="height: 100%">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'preview' | translate}}</h4>
+            </div>
+            <div class="modal-body" style="height: 80%">
+              <div style="height: 100%">
+                Preview for <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
+                <iframe srcdoc="{{ previewHTML | unsafe }}" width="100%" style="height:100%;"></iframe>
+              </div>
+              <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated fadeIn" id="sendMail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form  ng-submit="sendMail()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'send_mail' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                Sending email with template <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
+                Email: <input type="text" ng-model="singleSelection().tempModel.email"><br />
+                <input type="checkbox" id="transport" ng-model="singleSelection().tempModel.mailTransport"> Use SendGrid<br />
+              </div>
+              <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess">{{'send_mail' | translate}}</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 <div class="modal animated fadeIn" id="rename">
   <div class="modal-dialog">

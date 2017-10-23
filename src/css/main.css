@@ -1,14 +1,9 @@
-body {
+angular-filemanager {
   font-size: 14px;
   height: 100vh;
 }
 
-*,
-*:focus {
-  outline: 0!important;
-}
-
-.navbar {
+angular-filemanager .navbar {
   min-height: 32px;
   margin-bottom: 0;
   border: 0;
@@ -16,16 +11,16 @@ body {
   color: #fff;
 }
 
-.navbar .navbar-collapse {
+angular-filemanager .navbar .navbar-collapse {
   overflow: visible;
   padding: 0;
 }
 
-.navbar .navbar-toggle {
+angular-filemanager .navbar .navbar-toggle {
   padding: 5px 10px;
 }
 
-.navbar .navbar-brand {
+angular-filemanager .navbar .navbar-brand {
   font-size: inherit;
   height: 55px;
   line-height: 100%;
@@ -70,31 +65,31 @@ textarea.code {
   margin-top: -5px;
 }
 
-.nav-sidebar {
+angular-filemanager .nav-sidebar {
   margin-right: -21px;
   margin-bottom: 20px;
   margin-left: -20px;
 }
 
 
-.nav-sidebar > li > a {
+angular-filemanager .nav-sidebar > li > a {
   color: #7a7a7a;
   padding: 7px 0 7px 16px;
 }
 
 
-.nav-sidebar> li > a:hover, 
-.nav-sidebar> li > a:focus {
+angular-filemanager .nav-sidebar> li > a:hover, 
+angular-filemanager .nav-sidebar> li > a:focus {
   background: none;
   color: #1378b9;
 }
 
-.nav-sidebar > li.active > a {
+angular-filemanager .nav-sidebar > li.active > a {
   color: #2196F3;
 }
 
 
-.main {
+angular-filemanager .main {
   padding: 0;
 }
 
@@ -117,7 +112,7 @@ textarea.code {
   padding-left: 0px;
 }
 
-.table td {
+angular-filemanager .table td {
   vertical-align: middle;
 }
 
@@ -257,12 +252,12 @@ textarea.code {
   margin-top: 8%;
 }
 
-a:hover,
-a:active,
-a:focus,
-table th > a:hover,
-table th > a:active,
-table th > a:focus {
+angular-filemanager a:hover,
+angular-filemanager a:active,
+angular-filemanager a:focus,
+angular-filemanager table th > a:hover,
+angular-filemanager table th > a:active,
+angular-filemanager table th > a:focus {
   text-decoration: none;
 }
 
@@ -282,19 +277,19 @@ table th > a:focus {
   display: none !important;
 }
 
-.mr2 {
+angular-filemanager .mr2 {
   margin-right: 2px;
 }
 
-.mr5 {
+angular-filemanager .mr5 {
   margin-right: 5px;
 }
 
-.mt10 {
+angular-filemanager .mt10 {
   margin-top: 10px;
 }
 
-.mb0 {
+angular-filemanager .mb0 {
   margin-bottom: 0;
 }
 
@@ -316,7 +311,7 @@ table th > a:focus {
   font-weight: bold;
 }
 
-.main {
+angular-filemanager .main {
   overflow-y: auto;
 }
 
@@ -327,9 +322,9 @@ table th > a:focus {
   }
 
   /* The view should fill all available vertical space */
-  angular-filemanager > div,.row,.main,.sidebar {
+  /* angular-filemanager > div,.row,.main,.sidebar {
     height: 100%;
-  }
+  } */
 
   .container-fluid {
     height: -webkit-calc(100% - 58px);
@@ -375,24 +370,24 @@ table th > a:focus {
   font-size: 10px;
 }
 
-.navbar .btn.btn-flat {
+angular-filemanager .navbar .btn.btn-flat {
   padding: 2px;
   width: 32px;
   height: 30px;
   margin-left: 5px;
 }
 
-.navbar-inverse .navbar-toggle .icon-bar {
+angular-filemanager .navbar-inverse .navbar-toggle .icon-bar {
   background: #fff;
 }
 
-.navbar-inverse .navbar-form input[type="text"] {
+angular-filemanager .navbar-inverse .navbar-form input[type="text"] {
   color: #7a7a7a;
   box-shadow: none;
   margin: 0 10px;
 }
 
-.navbar .navbar-form {
+angular-filemanager .navbar .navbar-form {
   border-bottom: none;
   border-top: none;
   box-shadow: none;
@@ -400,7 +395,7 @@ table th > a:focus {
   margin: 12px 0;
 }
 
-.breadcrumb {
+angular-filemanager .breadcrumb {
   background: none; 
   padding: 0;
   font-size: 17px;
@@ -409,19 +404,19 @@ table th > a:focus {
   max-height: 30px
 }
 
-.breadcrumb>.active,
-.breadcrumb a {
+angular-filemanager .breadcrumb>.active,
+angular-filemanager .breadcrumb a {
   color: #fff;
 }
 
-.breadcrumb>li+li:before {
+angular-filemanager .breadcrumb>li+li:before {
   font-family: 'Glyphicons Halflings';
   content: "\e080";
   font-size: 12px;
   color: #fff;
 }
 
-.scrollable-menu {
+angular-filemanager .scrollable-menu {
   height: auto;
   max-height: 200px;
   overflow-x: hidden;

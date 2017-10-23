@@ -41,6 +41,27 @@
             return this.apiHandler.remove(fileManagerConfig.removeUrl, items);
         };
 
+        ApiMiddleware.prototype.preview = function(data) {
+            return this.apiHandler.preview(fileManagerConfig.previewUrl, data);
+        };
+
+        ApiMiddleware.prototype.checkActivate = function(data) {
+            return this.apiHandler.checkActivate(fileManagerConfig.checkActivateUrl, data);
+        };
+
+        ApiMiddleware.prototype.activate = function(data) {
+            return this.apiHandler.activate(fileManagerConfig.activateUrl, data);
+        };
+
+        ApiMiddleware.prototype.newVersion = function(item) {
+            var itemPath = this.getFilePath(item);
+            return this.apiHandler.newVersion(fileManagerConfig.newVersionUrl, itemPath);
+        };
+
+        ApiMiddleware.prototype.sendMail = function(data) {
+            return this.apiHandler.sendMail(fileManagerConfig.mailUrl, data);
+        };
+
         ApiMiddleware.prototype.upload = function(files, path) {
             if (! $window.FormData) {
                 throw new Error('Unsupported browser version');

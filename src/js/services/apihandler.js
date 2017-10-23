@@ -155,6 +155,101 @@
             return deferred.promise;
         };
 
+        ApiHandler.prototype.newVersion = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'newVersion',
+                item: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_newVersion'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.preview = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'preview',
+                item: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_previewing'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.activate = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'activate',
+                item: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_activating'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.checkActivate = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'checkActivate',
+                item: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_checkingActivation'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.sendMail = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'sendTemplateMail',
+                params: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_checkingSendMail'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
         ApiHandler.prototype.getContent = function(apiUrl, itemPath) {
             var self = this;
             var deferred = $q.defer();

@@ -19,6 +19,8 @@
         $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-icons.html';
         $scope.fileList = [];
         $scope.temps = [];
+        $scope.checkActivationResult = null;
+        $scope.email = '';
 
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
@@ -193,6 +195,54 @@
                 $scope.fileNavigator.refresh();
                 $scope.modal('changepermissions', true);
             });
+        };
+
+        $scope.preview = function() {
+            var selectedPath = $scope.singleSelection().model.fullPath();
+            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
+            var regRes = new RegExp(regex, 'g').exec(selectedPath);
+            var data = {userId: 1, selectedTemplateType: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            $scope.apiMiddleware.preview(data).then(function(res) {
+                $scope.previewHTML = res.data.html;
+            });
+        };
+
+        $scope.checkActivate = function() {
+            var selectedPath = $scope.singleSelection().model.fullPath();
+            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
+            var regRes = new RegExp(regex, 'g').exec(selectedPath);
+            var data = {template: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            $scope.apiMiddleware.checkActivate(data).then(function(res) {
+                $scope.checkActivationResult = res;
+            });
+        };
+
+        $scope.activate = function() {
+            var selectedPath = $scope.singleSelection().model.fullPath();
+            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
+            var regRes = new RegExp(regex, 'g').exec(selectedPath);
+            var data = {template: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            $scope.apiMiddleware.activate(data).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('activate', true);
+            });
+        };
+
+        $scope.newVersion = function() {
+            $scope.apiMiddleware.newVersion($scope.singleSelection()).then(function() {
+                $scope.fileNavigator.refresh();
+            });
+        };
+
+        $scope.sendMail = function() {
+            var selectedPath = $scope.singleSelection().model.fullPath();
+            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
+            var regRes = new RegExp(regex, 'g').exec(selectedPath);
+            var data = {userId: 1, templateName: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            data.transport = $scope.singleSelection().tempModel.mailTransport ? 'sendgrid' : 'sendmail';
+            data.isMasp = true;
+            data.email = $scope.singleSelection().tempModel.email;
+            $scope.apiMiddleware.sendMail(data);
         };
 
         $scope.download = function() {

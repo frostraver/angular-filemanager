@@ -209,25 +209,25 @@ textarea.code {
   background-color: #888;
 }
 
-.dropdown-menu {
+angular-filemanager .dropdown-menu {
   font-size: 14px;
 }
 
-.dropdown-menu > li > a {
+angular-filemanager .dropdown-menu > li > a {
   padding: 6px 20px;
 }
 
-.dropdown-menu > li > a > i {
+angular-filemanager .dropdown-menu > li > a > i {
   margin-right: 4px;
 }
 
-.dropdown-menu.dropdown-right-click {
+angular-filemanager .dropdown-menu.dropdown-right-click {
   display: block;
   position: static;
   margin-bottom: 5px; 
 }
 
-.dropdown-menu.dropdown-right-click .divider {
+angular-filemanager .dropdown-menu.dropdown-right-click .divider {
   margin: 3px 0;
 }
 
