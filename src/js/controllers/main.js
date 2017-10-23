@@ -413,10 +413,13 @@
         $scope.fileNavigator.refresh();
 
         $scope.loadAce = function() {
-            var editor = ace.edit('editor');
+            var editor = window.ace.edit('editor');
             editor.getSession().setMode('ace/mode/javascript');
             editor.getSession().setValue($scope.singleSelection().tempModel.content, 1);
-        }
+            editor.on('change', function() {
+                $scope.singleSelection().tempModel.content = editor.getSession().getValue();
+            });
+        };
 
     }]);
 })(angular);
