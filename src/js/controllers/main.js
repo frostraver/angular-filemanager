@@ -200,9 +200,8 @@
 
         $scope.preview = function() {
             var selectedPath = $scope.singleSelection().model.fullPath();
-            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
-            var regRes = new RegExp(regex, 'g').exec(selectedPath);
-            var data = {userId: 1, selectedTemplateType: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
+            var data = {selectedTemplateType: fileName, language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
             $scope.apiMiddleware.preview(data).then(function(res) {
                 $scope.previewHTML = res.data.html;
             });
@@ -210,9 +209,8 @@
 
         $scope.checkActivate = function() {
             var selectedPath = $scope.singleSelection().model.fullPath();
-            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
-            var regRes = new RegExp(regex, 'g').exec(selectedPath);
-            var data = {template: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
+            var data = {template: fileName, language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
             $scope.apiMiddleware.checkActivate(data).then(function(res) {
                 $scope.checkActivationResult = res;
             });
@@ -237,9 +235,8 @@
 
         $scope.sendMail = function() {
             var selectedPath = $scope.singleSelection().model.fullPath();
-            var regex = '\/(([a-zA-Z0-9]+(\/|))*)';
-            var regRes = new RegExp(regex, 'g').exec(selectedPath);
-            var data = {userId: 1, templateName: regRes[1], language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
+            var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
+            var data = {templateName: fileName, language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
             data.transport = $scope.singleSelection().tempModel.mailTransport ? 'sendgrid' : 'sendmail';
             data.isMasp = true;
             data.email = $scope.singleSelection().tempModel.email;

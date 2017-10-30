@@ -113,7 +113,7 @@
             <div class="modal-body" style="height: 80%">
               <div style="height: 100%">
                 Preview for <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
-                <iframe srcdoc="{{ previewHTML }}" width="100%" style="height:100%;"></iframe>
+                <iframe srcdoc="{{ previewHTML | unsafe }}" width="100%" style="height:100%;"></iframe>
               </div>
               <div ng-include data-src="'error-bar'" class="clearfix"></div>
             </div>
