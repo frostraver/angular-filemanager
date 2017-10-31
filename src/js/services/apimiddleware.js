@@ -25,6 +25,10 @@
             return this.apiHandler.list(fileManagerConfig.listUrl, this.getPath(path), customDeferredHandler);
         };
 
+        ApiMiddleware.prototype.getExampleList = function(path) {
+            return this.apiHandler.getExampleList(fileManagerConfig.getExampleListUrl, this.getPath(path));
+        };
+
         ApiMiddleware.prototype.copy = function(files, path) {
             var items = this.getFileList(files);
             var singleFilename = items.length === 1 ? files[0].tempModel.name : undefined;
@@ -148,6 +152,10 @@
         ApiMiddleware.prototype.createFolder = function(item) {
             var path = item.tempModel.fullPath();
             return this.apiHandler.createFolder(fileManagerConfig.createFolderUrl, path);
+        };
+
+        ApiMiddleware.prototype.instantiateExample = function(name) {
+            return this.apiHandler.instantiateExample(fileManagerConfig.instantiateExampleUrl, name);
         };
 
         return ApiMiddleware;

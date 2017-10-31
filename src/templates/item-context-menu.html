@@ -120,5 +120,10 @@
                 <i class="glyphicon glyphicon-cloud-upload"></i> {{'upload_files' | translate}}
             </a>
         </li>
+        <li ng-show="config.allowedActions.instantiateExample">
+            <a href="" tabindex="-1" ng-click="modal('instantiateExample'); getExampleList();">
+                <i class="glyphicon glyphicon-download-alt"></i> {{'instantiate_example' | translate}}
+            </a>
+        </li>
     </ul>
 </div>

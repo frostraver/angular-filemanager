@@ -7,6 +7,7 @@
             defaultLang: 'en',
 
             listUrl: 'bridges/php/handler.php',
+            getExampleListUrl: 'bridges/php/handler/php',
             uploadUrl: 'bridges/php/handler.php',
             renameUrl: 'bridges/php/handler.php',
             copyUrl: 'bridges/php/handler.php',
@@ -25,6 +26,7 @@
             newVersionUrl: 'bridges/php/handler.php',
             previewUrl: 'bridges/php/handler.php',
             mailUrl: 'bridges/php/handler.php',
+            instantiateExample: 'bridges/php/handler/php',
             basePath: '/',
 
             searchForm: true,
@@ -50,7 +52,8 @@
                 activate: true,
                 checkActivate: true,
                 newVersion: true,
-                sendMail: true
+                sendMail: true,
+                instantiateExample: true
             },
 
             multipleDownloadFileName: 'angular-filemanager.zip',

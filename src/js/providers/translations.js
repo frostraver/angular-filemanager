@@ -69,6 +69,7 @@
             move: 'Move',
             new_version: 'New Version',
             send_mail: 'Send Mail',
+            instantiate_example: 'Instanciate Example',
             activate: 'Activate',
             download: 'Download',
             view_item: 'View item',

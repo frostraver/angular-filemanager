@@ -113,9 +113,40 @@
             <div class="modal-body" style="height: 80%">
               <div style="height: 100%">
                 Preview for <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
-                <iframe srcdoc="{{ previewHTML | unsafe }}" width="100%" style="height:100%;"></iframe>
+                <iframe srcdoc="{{ previewHTML }}" width="100%" style="height:100%;"></iframe>
               </div>
               <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated fadeIn" id="instantiateExample">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="instantiateExample()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'instantiate_example' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <div ng-if="tempExample">Currently selected <b>{{tempExample}}</b></div>
+                <ul ng-if="exampleList">
+                  <li ng-repeat="e in exampleList">
+                    <div style="cursor: pointer"  ng-click="setExampleTemp(e.name)">{{e.name}}</div>
+                  </li>
+                </ul>
+              </div>
+              <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess">{{'instantiate_example' | translate}}</button>
             </div>
         </form>
     </div>

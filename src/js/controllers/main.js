@@ -21,6 +21,7 @@
         $scope.temps = [];
         $scope.checkActivationResult = null;
         $scope.email = '';
+        $scope.tempExample = null;
 
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
@@ -207,6 +208,12 @@
             });
         };
 
+        $scope.getExampleList = function() {
+            $scope.apiMiddleware.getExampleList([]).then(function(res) {
+                $scope.exampleList = res.result;
+            });
+        };
+
         $scope.checkActivate = function() {
             var selectedPath = $scope.singleSelection().model.fullPath();
             var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
@@ -241,6 +248,13 @@
             data.isMasp = true;
             data.email = $scope.singleSelection().tempModel.email;
             $scope.apiMiddleware.sendMail(data);
+        };
+
+        $scope.instantiateExample = function() {
+            $scope.apiMiddleware.instantiateExample($scope.tempExample).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('instantiateExample', true);
+            });
         };
 
         $scope.download = function() {
@@ -418,5 +432,8 @@
             });
         };
 
+        $scope.setExampleTemp = function(name) {
+            $scope.tempExample = name;
+        };
     }]);
 })(angular);

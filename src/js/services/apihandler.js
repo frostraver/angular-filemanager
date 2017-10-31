@@ -56,6 +56,26 @@
             return deferred.promise;
         };
 
+        ApiHandler.prototype.getExampleList = function(apiUrl, path) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'getExampleList',
+                newPath: path
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).then(function(response) {
+                self.deferredHandler(response.data, deferred, response.status);
+            }, function(response) {
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_copying'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
         ApiHandler.prototype.copy = function(apiUrl, items, path, singleFilename) {
             var self = this;
             var deferred = $q.defer();
@@ -225,6 +245,25 @@
                 self.deferredHandler(data, deferred, code);
             }).error(function(data, code) {
                 self.deferredHandler(data, deferred, code, $translate.instant('error_checkingActivation'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.instantiateExample = function(apiUrl, name) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'instantiateExample',
+                template: name
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_activating'));
             })['finally'](function() {
                 self.inprocess = false;
             });
