@@ -29,6 +29,10 @@
             return this.apiHandler.getExampleList(fileManagerConfig.getExampleListUrl, this.getPath(path));
         };
 
+        ApiMiddleware.prototype.getAllTemplates = function(path) {
+            return this.apiHandler.getAllTemplates(fileManagerConfig.getAllTemplatesUrl, this.getPath(path));
+        };
+
         ApiMiddleware.prototype.copy = function(files, path) {
             var items = this.getFileList(files);
             var singleFilename = items.length === 1 ? files[0].tempModel.name : undefined;
@@ -64,6 +68,10 @@
 
         ApiMiddleware.prototype.sendMail = function(data) {
             return this.apiHandler.sendMail(fileManagerConfig.mailUrl, data);
+        };
+
+        ApiMiddleware.prototype.selectAndSendTestMail = function(data) {
+            return this.apiHandler.selectAndSendTestMail(fileManagerConfig.mailUrl, data);
         };
 
         ApiMiddleware.prototype.upload = function(files, path) {

@@ -22,6 +22,8 @@
         $scope.checkActivationResult = null;
         $scope.email = '';
         $scope.tempExample = null;
+        // selectAndSendMail
+        $scope.temp = {selectedTemplate: {}, selectedUser: {}};
 
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
@@ -214,6 +216,12 @@
             });
         };
 
+        $scope.getAllTemplates = function() {
+            $scope.apiMiddleware.getAllTemplates([]).then(function(res) {
+                $scope.allTemplates = res.result.files.map(function(x){return {path: x, name: x.match(/\/(.*)\./) && x.match(/\/(.*)\./)[1] || x, tempModel: {}};});
+            });
+        };
+
         $scope.checkActivate = function() {
             var selectedPath = $scope.singleSelection().model.fullPath();
             var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
@@ -247,7 +255,20 @@
             data.transport = $scope.singleSelection().tempModel.mailTransport ? 'sendgrid' : 'sendmail';
             data.isMasp = true;
             data.email = $scope.singleSelection().tempModel.email;
-            $scope.apiMiddleware.sendMail(data);
+            $scope.apiMiddleware.sendMail(data).then(function() {
+                $scope.modal('sendMail', true);
+            });
+        };
+
+        $scope.sendSelectedMail = function() {
+            var data = {userId: $scope.temp.selectedUser, templateName: $scope.temp.selectedTemplate.name, language: $scope.temp.language };
+            console.log('-------------->', data);
+            data.transport = $scope.temp.selectedTemplate.tempModel.transport ? 'sendgrid' : 'sendmail';
+            data.isMasp = false;
+            data.email = $scope.temp.selectedTemplate.tempModel.email;
+            $scope.apiMiddleware.sendMail(data).then(function() {
+                $scope.modal('selectAndSendTestMail', true);
+            });
         };
 
         $scope.instantiateExample = function() {
@@ -404,6 +425,13 @@
 
         $scope.getUrl = function(_item) {
             return $scope.apiMiddleware.getUrl(_item);
+        };
+
+        $scope.selectAndSendTestMail = function() {
+            $scope.apiMiddleware.selectAndSendTestMail($scope.tempExample).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('selectAndSendTestMail', true);
+            });
         };
 
         var validateSamePath = function(item) {

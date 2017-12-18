@@ -17,6 +17,12 @@
                             </button>
                             {{fileNavigator.getCurrentFolderName() | strLimit : 12}}
                         </div>
+                        <button class="btn btn-flat btn-sm" type="button" ng-click="modal('selectAndSendTestMail'); getAllTemplates()">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </button>
+                        <button class="btn btn-flat btn-sm" type="button" ng-click="modal('instantiateExample'); getExampleList();">
+                            <i class="glyphicon glyphicon-plus-sign mr2"></i>
+                        </button>
                         <div class="btn-group">
                             <button class="btn btn-flat btn-sm dropdown-toggle" type="button" id="dropDownMenuSearch" data-toggle="dropdown" aria-expanded="true">
                                 <i class="glyphicon glyphicon-search mr2"></i>

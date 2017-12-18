@@ -113,7 +113,7 @@
             <div class="modal-body" style="height: 80%">
               <div style="height: 100%">
                 Preview for <b>{{singleSelection() && singleSelection().model.name}}</b><br /><br />
-                <iframe srcdoc="{{ previewHTML }}" width="100%" style="height:100%;"></iframe>
+                <iframe srcdoc="{{ previewHTML | unsafe }}" width="100%" style="height:100%;"></iframe>
               </div>
               <div ng-include data-src="'error-bar'" class="clearfix"></div>
             </div>
@@ -135,10 +135,10 @@
             </div>
             <div class="modal-body">
               <div>
-                <div ng-if="tempExample">Currently selected <b>{{tempExample}}</b></div>
+                <div>Currently selected <b>{{tempExample || 'None'}}</b></div>
                 <ul ng-if="exampleList">
                   <li ng-repeat="e in exampleList">
-                    <div style="cursor: pointer"  ng-click="setExampleTemp(e.name)">{{e.name}}</div>
+                    <div style="cursor: pointer" ng-click="setExampleTemp(e.name)">{{e.name}}</div>
                   </li>
                 </ul>
               </div>
@@ -175,6 +175,38 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
               <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess">{{'send_mail' | translate}}</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated fadeIn" id="selectAndSendTestMail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="sendSelectedMail()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'send_mail' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <table>
+                <tr><td>Sending email with template:</td><td><b>{{temp.selectedTemplate && temp.selectedTemplate.name || 'none'}}</b></td></tr>
+                <tr><td>Template: </td><td><select ng-options="e as e.name for e in allTemplates" ng-model="temp.selectedTemplate"></select></td><td>Language: <select ng-model="temp.language"><option value="en">EN</option><option value="nl">NL</option><option value="fr">FR</option></select></td></tr>
+                <tr><td>Email: </td><td><input type="text" ng-model="temp.selectedTemplate.tempModel.email"></td></tr>
+                <tr><td>User: </td><td><agl-user-select ng-model="temp.selectedUser" style="display: inline-block;"></agl-user-select></td></tr>
+                <tr><td><input type="checkbox" id="transport" ng-model="temp.selectedTemplate.tempModel.transport"> Use SendGrid</td></tr>
+                </table>
+              </div>
+              <div ng-include data-src="'error-bar'" class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess || !temp.selectedTemplate">{{'send_mail' | translate}}</button>
             </div>
         </form>
     </div>

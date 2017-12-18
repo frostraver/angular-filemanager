@@ -69,7 +69,27 @@
             $http.post(apiUrl, data).then(function(response) {
                 self.deferredHandler(response.data, deferred, response.status);
             }, function(response) {
-                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_copying'));
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_getExampleList'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.getAllTemplates = function(apiUrl) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'getAllTemplates',
+                isMasp: false
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).then(function(response) {
+                self.deferredHandler(response.data, deferred, response.status);
+            }, function(response) {
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_getAllTemplates'));
             })['finally'](function() {
                 self.inprocess = false;
             });
@@ -283,6 +303,25 @@
                 self.deferredHandler(data, deferred, code);
             }).error(function(data, code) {
                 self.deferredHandler(data, deferred, code, $translate.instant('error_checkingSendMail'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.selectAndSendTestMail = function(apiUrl, itemPath) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'selectAndSendTestMail',
+                params: itemPath
+            };
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_checkingSelectAndSendTestMail'));
             })['finally'](function() {
                 self.inprocess = false;
             });

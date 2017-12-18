@@ -27,6 +27,7 @@
             previewUrl: 'bridges/php/handler.php',
             mailUrl: 'bridges/php/handler.php',
             instantiateExample: 'bridges/php/handler/php',
+            getAllTemplatesUrl: 'bridges/php/handler/php', 
             basePath: '/',
 
             searchForm: true,
@@ -53,7 +54,9 @@
                 checkActivate: true,
                 newVersion: true,
                 sendMail: true,
-                instantiateExample: true
+                instantiateExample: true,
+                selectAndSendTestMail: true,
+                getAllTemplates: true
             },
 
             multipleDownloadFileName: 'angular-filemanager.zip',
