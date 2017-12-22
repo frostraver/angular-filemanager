@@ -206,7 +206,10 @@
             var fileName = $scope.singleSelection().model.name.match(/(.*)_/)[1];
             var data = {selectedTemplateType: fileName, language: selectedPath.match(/_../) ? selectedPath.match(/_../)[0].replace('_','') : '' };
             $scope.apiMiddleware.preview(data).then(function(res) {
-                $scope.previewHTML = res.data.html;
+              $scope.previewError = '';
+              $scope.previewHTML = '';
+              if(res.result == 'error') $scope.previewError = res.reason&&res.reason.replace(/(\\r)?\\n/g,'\n');
+              else $scope.previewHTML = res.data.html;
             });
         };
 
